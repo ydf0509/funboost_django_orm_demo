@@ -16,7 +16,8 @@ def close_old_connections_deco(f):
 
 @boost(BoosterParams(queue_name='create_student_queue',
                      broker_kind=BrokerEnum.REDIS_ACK_ABLE,
-                     consumin_function_decorator=close_old_connections_deco)
+                     consumin_function_decorator=close_old_connections_deco,  # 如果gone away 一直好不了,可以加这个装饰器. jdango_celery 也是调用了 close_old_connections_deco方法.
+                     )
        )
 def create_student(name, age, ):
     ''' 在funboost 后台进程中去操作 dajngo  orm'''
@@ -34,6 +35,6 @@ if __name__ == '__main__':
 
     django.setup()
 
-    ### 上面这四行是必须要做的,如果脱离了web上下文环境,在独立的函数或者在funboost celery 后台中运行,一定先要设置好配置文件环境变量,并执行 django.setup()
+    ### 上面这四行是必须要做的,如果脱离了web上下文环境,在独立的函数或者在funboost 或 celery 后台中运行,一定先要设置好配置文件环境变量,并执行 django.setup()
 
     create_student('xiaomin', 16)
