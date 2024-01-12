@@ -30,7 +30,7 @@ def create_student(name, age, ):
 ```
 
 ```
-其实只要django基础扎实的人,很容易就知道funboost为什么直接运行不了 create_student 这个函数,
+其实只要django基础扎实的人,很容易就知道funboost或者独立的python脚本中为什么直接运行不了 create_student 这个函数,
 用户自己如果在view视图 函数里面调用这个 create_student 函数,是很容易操作到orm的,
 
 即使不使用funboost框架,用户如果自己想在独立的脚本中直接运行 create_student 这个函数,那就要做点额外的操作了,
@@ -91,6 +91,26 @@ django.setup()
 
 运行 python run_funboost.py 文件,启动消费
 
+可以看到,代码最上面中加了4行代码,django.setup()是关键,代码如下:
+
+```python
+import os
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'funboost_django_orm_demo.settings')
+
+import django
+
+django.setup()
+
+### 上面这四行是必须要做的非常非常重要,如果脱离了web上下文环境,在独立的函数或者在funboost celery 后台中运行,一定先要设置好 DJANGO_SETTINGS_MODULE 环境变量,并执行 django.setup()
+
+
+from students.your_functions import create_student
+
+if __name__ == '__main__':
+    create_student.consume()
+
+```
 
 ### 3.2 启动web
 
