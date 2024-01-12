@@ -2,7 +2,7 @@
 
 # 演示 funboost + django + 函数中操作 orm
 
-之前的项目中没有演示函数里面操作 orm,导致很多人一直不懂怎么操作orm
+之前的项目中没有演示函数里面操作 orm,导致很多人一直不懂怎么操作orm,主要是不懂 django.setup()
 
 这是之前的funboost + django演示项目:
 
