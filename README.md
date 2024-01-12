@@ -87,6 +87,32 @@ django.setup()
 
 关键文件 students/your_functions.py 中操作orm
 
+### 3.0 生成数据库
+
+funboost_django_orm_demo/settings.py 配置数据库连接,也可以使用sqlite
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE':'pymysql',
+        'NAME': 'testdb',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+```
+
+
+在项目根目录下运行以下命令，使Django生成数据库迁移文件：
+python manage.py makemigrations
+
+执行数据库迁移命令，将模型映射到MySQL数据库：
+python manage.py migrate
+
+
 ### 3.1 启动后台消费
 
 运行 python run_funboost.py 文件,启动消费
@@ -113,6 +139,9 @@ if __name__ == '__main__':
 ```
 
 ### 3.2 启动web
+
+
+
 
 python manage.py runserver
 
