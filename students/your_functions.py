@@ -7,16 +7,20 @@ from students.models import Student
 def close_old_connections_deco(f):
     def _inner(*args, **kwargs):
         close_old_connections()
-        res = f(*args, **kwargs)
-        close_old_connections()
-        return res
+        try:
+            result = f(*args, **kwargs)
+        finally:
+            close_old_connections()
+
+        return result
 
     return _inner
 
 
 @boost(BoosterParams(queue_name='create_student_queue',
                      broker_kind=BrokerEnum.REDIS_ACK_ABLE,
-                     consumin_function_decorator=close_old_connections_deco,  # 如果gone away 一直好不了,可以加这个装饰器. jdango_celery 也是调用了 close_old_connections_deco方法.
+                     consumin_function_decorator=close_old_connections_deco, # 如果gone away 一直好不了,可以加这个装饰器. django_celery django-apschrduler这些插件中 也是调用了 close_old_connections_deco方法.
+
                      )
        )
 def create_student(name, age, ):
