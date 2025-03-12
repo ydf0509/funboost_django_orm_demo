@@ -14,6 +14,7 @@ https://github.com/ydf0509/django_use_funboost
 
 现在新增演示orm操作,demo是学生管理,后台函数中orm来添加学生<span style="color:red">(关键是要执行django.setup() ) </span>
 
+**！！！关键的关键的关键是要执行 django.setup()**
 
 ## 2 funboost执行普通函数和执行django 的 有orm操作函数的区别是什么?
 
