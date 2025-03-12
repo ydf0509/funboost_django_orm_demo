@@ -12,7 +12,7 @@ funboost 和django搭配不像 django_celery 还要专门特意搞个三方插�
 https://github.com/ydf0509/django_use_funboost
 
 
-现在新增演示orm操作,demo是学生管理,后台函数中orm来添加学生<p style:corlor=red>(关键是要执行django.setup() ) </p>
+现在新增演示orm操作,demo是学生管理,后台函数中orm来添加学生<p style:color='red'>(关键是要执行django.setup() ) </p>
 
 
 ## 2 funboost执行普通函数和执行django 的 有orm操作函数的区别是什么?
